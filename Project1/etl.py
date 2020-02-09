@@ -6,6 +6,7 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+<<<<<<< HEAD
     """Function process songs files, first
     read json file check if json is not empty file
     and make request to database.
@@ -58,15 +59,48 @@ def process_log_file(cur, filepath):
     # time columns
     column_labels = ('start_time', 'hour', 'day', 'week', 'month', 'year', 'weekday')
     time_df = pd.DataFrame(dict(zip(column_labels, time_data)))
+=======
+    # open song file
+    df = 
+
+    # insert song record
+    song_data = 
+    cur.execute(song_table_insert, song_data)
+    
+    # insert artist record
+    artist_data = 
+    cur.execute(artist_table_insert, artist_data)
+
+
+def process_log_file(cur, filepath):
+    # open log file
+    df = 
+
+    # filter by NextSong action
+    df = 
+
+    # convert timestamp column to datetime
+    t = 
+    
+    # insert time data records
+    time_data = 
+    column_labels = 
+    time_df = 
+>>>>>>> master
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
+<<<<<<< HEAD
     # user columns
     user_columns = ['userId', 'firstName', 'lastName', 'gender', 'level']
 
     # load user table
     user_df = df[user_columns].drop_duplicates(subset=['userId'], keep='first')
+=======
+    # load user table
+    user_df = 
+>>>>>>> master
 
     # insert user records
     for i, row in user_df.iterrows():
@@ -76,6 +110,7 @@ def process_log_file(cur, filepath):
     for index, row in df.iterrows():
         
         # get songid and artistid from song and artist tables
+<<<<<<< HEAD
         cur.execute(song_select, (row.song, row.artist, row.length))
         results = cur.fetchone()
         
@@ -87,10 +122,18 @@ def process_log_file(cur, filepath):
         # insert songplay record
         songplay_data = (index, t[index], row.userId, row.level, songid, artistid,
                          row.sessionId, row.location, row.userAgent)
+=======
+        results = cur.execute(song_select, (row.song, row.artist, row.length))
+        songid, artistid = results if results else None, None
+
+        # insert songplay record
+        songplay_data = 
+>>>>>>> master
         cur.execute(songplay_table_insert, songplay_data)
 
 
 def process_data(cur, conn, filepath, func):
+<<<<<<< HEAD
     """Function process data with specify function
     Parameters
     ----------
@@ -103,6 +146,8 @@ def process_data(cur, conn, filepath, func):
     func: function
         python function which process data, function must have input (cur, absolte_path_to_file)
     """
+=======
+>>>>>>> master
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -122,14 +167,21 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+<<<<<<< HEAD
     """Connect to database, run all process function and close connection.
     """
+=======
+>>>>>>> master
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
     process_data(cur, conn, filepath='data/log_data', func=process_log_file)
+<<<<<<< HEAD
     print('Successfully insert data into database')
+=======
+
+>>>>>>> master
     conn.close()
 
 

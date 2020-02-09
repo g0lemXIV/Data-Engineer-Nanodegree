@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CREAT ENUM TYPES
 enum_subscriber = """CREATE TYPE subscriber AS ENUM ('free', 'paid', 'NaN')"""
 enum_gender = """CREATE TYPE gender AS ENUM ('F', 'M')"""
@@ -69,11 +70,37 @@ CREATE TABLE IF NOT EXISTS songplays (
                         FOREIGN KEY (artist_id) REFERENCES artists(artist_id),
                         FOREIGN KEY (song_id) REFERENCES songs(song_id)
                        );
+=======
+# DROP TABLES
+
+songplay_table_drop = ""
+user_table_drop = ""
+song_table_drop = ""
+artist_table_drop = ""
+time_table_drop = ""
+
+# CREATE TABLES
+
+songplay_table_create = ("""
+""")
+
+user_table_create = ("""
+""")
+
+song_table_create = ("""
+""")
+
+artist_table_create = ("""
+""")
+
+time_table_create = ("""
+>>>>>>> master
 """)
 
 # INSERT RECORDS
 
 songplay_table_insert = ("""
+<<<<<<< HEAD
 INSERT INTO songplays (
             songplay_id, 
             start_time, 
@@ -127,10 +154,22 @@ ON CONFLICT (artist_id)
 DO UPDATE SET location = EXCLUDED.location,
               latitude = EXCLUDED.latitude,
               longitude = EXCLUDED.longitude;
+=======
+""")
+
+user_table_insert = ("""
+""")
+
+song_table_insert = ("""
+""")
+
+artist_table_insert = ("""
+>>>>>>> master
 """)
 
 
 time_table_insert = ("""
+<<<<<<< HEAD
 INSERT INTO time (
             start_time,
             hour,
@@ -140,11 +179,14 @@ INSERT INTO time (
             year,
             weekday)
 VALUES (%s, %s, %s, %s, %s, %s, %s);
+=======
+>>>>>>> master
 """)
 
 # FIND SONGS
 
 song_select = ("""
+<<<<<<< HEAD
 SELECT * FROM songs
 JOIN artists ON songs.artist_id=artists.artist_id
 WHERE songs.tittle = %s 
@@ -155,4 +197,11 @@ AND songs.duration = %s;
 # QUERY LISTS
 enum_queries = [enum_gender, enum_subscriber]
 create_table_queries = [user_table_create, song_table_create, artist_table_create, time_table_create, songplay_table_create]
+=======
+""")
+
+# QUERY LISTS
+
+create_table_queries = [songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
+>>>>>>> master
 drop_table_queries = [songplay_table_drop, user_table_drop, song_table_drop, artist_table_drop, time_table_drop]

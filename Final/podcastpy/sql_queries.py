@@ -49,8 +49,7 @@ CREATE TABLE IF NOT EXISTS staging_podcasts (
 staging_episodes_table_create = ("""
 CREATE TABLE IF NOT EXISTS staging_episodes (
                         guid INT NOT NULL PRIMARY KEY,
-                        comments_url VARCHAR,
-                        description VARCHAR(max),
+                        comments_url VARCHAR(max),
                         cc VARCHAR,
                         file_size FLOAT,
                         duration_itunes FLOAT,
@@ -82,9 +81,11 @@ CREATE TABLE IF NOT EXISTS podcast (
                         itunes_genre VARCHAR,
                         apple_trackID BIGINT,
                         feed_url VARCHAR,
+                        podcast_count INT,
                         FOREIGN KEY (podcastID) REFERENCES rating(podcastID)
                         )
 """)
+
 
 rating_table_create = ("""
 CREATE TABLE IF NOT EXISTS rating (
@@ -94,16 +95,16 @@ CREATE TABLE IF NOT EXISTS rating (
                         rating_volume INT sortkey
                         )
 diststyle auto;
-""")
+"""
+)
 
 episodes_table_create = ("""
 CREATE TABLE IF NOT EXISTS episode (
                         episodeid INT NOT NULL PRIMARY KEY,
                         title VARCHAR(max),
-                        description VARCHAR(max),
                         duration_itunes FLOAT,
                         file_size FLOAT,
-                        comments_url VARCHAR,
+                        comments_url VARCHAR(max),
                         licence VARCHAR,
                         relised_date TIMESTAMP sortkey
                         )
@@ -154,6 +155,8 @@ copy staging_episodes from '{}'
 
 # FINAL TABLES
 
+# FINAL TABLES
+
 author_insert = ("""
 INSERT INTO author (authorid, podcast_name, owner_name,
                     owner_email, country, language, currency)
@@ -168,9 +171,10 @@ FROM staging_podcasts stp
 WHERE stp.authorID IS NOT NULL;
 """)
 
+
 podcast_insert = ("""
 INSERT INTO podcast (podcastid, podcast_name, genre, itunes_genre,
-                     apple_trackid, feed_url, description)
+                     apple_trackid, feed_url, description, podcast_count)
 SELECT stp.podcastid as podcastid,
        stp.collectionName as podcast_name,
        stp.genre as genre,
@@ -178,6 +182,7 @@ SELECT stp.podcastid as podcastid,
        stp.trackid as apple_trackid,
        stp.feed_url as feed_url,
        stp.description as description
+       stp.podcast_count as podcast_count
 FROM staging_podcasts stp
 WHERE stp.feed_url IS NOT NULL;
 """)
@@ -193,11 +198,10 @@ FROM staging_podcasts stp;
 """)
 
 episode_insert = ("""
-INSERT INTO episode (episodeid, title, description, duration_itunes,
+INSERT INTO episode (episodeid, title, duration_itunes,
                     file_size, comments_url, licence, relised_date)
 SELECT ste.guid as episodeid,
        ste.title as title,
-       ste.description as description,
        ste.duration_itunes as duration_itunes,
        ste.file_size as file_size,
        ste.comments_url as comments_url,

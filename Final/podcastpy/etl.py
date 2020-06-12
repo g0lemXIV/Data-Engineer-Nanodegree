@@ -228,9 +228,11 @@ def main(test: bool = True):
     print("Start processing kaggle data")
     authors = load_authors_names(test=test)
     # test authors list
-
+    count_list(authors, 'Authors')
     print("Start collecting itunes data")
     feed_list = itunes_collect(authors)
+    # test feed list
+    count_list(feed_list, 'Feed url')
     print("Start collecting rrs feed")
     rss_collect(feed_list)
     print("Start data processing")
@@ -251,11 +253,17 @@ def main(test: bool = True):
             print(new_name)
             load_to_s3(path, s3_pth=new_name,
                        bucket_name=os.getenv('BUCKET_NAME'))
-        # Start Staging and Inserting
-        print("Starting S3 to Redshift loader")
-        s3_to_redshift()
-        print("Sucefully make data analitics tables")
-
+    # Start Staging and Inserting
+    print("Starting S3 to Redshift loader")
+    s3_to_redshift()
+    print("Sucefully make data analitics tables")
+    # Data quality check
+    tables_list = ['author', 'podcast', 'rating', 'episode', 'podcastplay']
+    conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*cfg['CLUSTER'].values()))
+    cur = conn.cursor()
+    for table in tables_list:
+        count_data(cur, table)
+    conn.close()
 
 if __name__ == "__main__":
     # parse arguments

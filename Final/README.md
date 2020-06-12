@@ -45,6 +45,10 @@ For storing the data set I used the S3 bucket there can also land data if the sy
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtLYWdnbGUgZGF0YXNldF0gLS0-fGF1dGhvciBuYW1lc3wgQihBcHBsZSBpVHVuZXMgQVBJKVxuICBCIC0tPiB8dXJsIGZlZWR8IEMoWE1MIGZlZWQpXG4gIEEgLS0-fHJhdGluZ3N8IERbTGFwdG9wXVxuICBCIC0tPnxhdXRvaG9ycyBpbmZvcm1hdGlvbnN8IERbaVBob25lXVxuICBDIC0tPnxlcGlzb2RlcyBpbmZvcm1hdGlvbnN8IER7TG9jYWwgc3RvcmFnZX1cblx0RCAtLT58cHJvY2Vzc2luZyBkYXRhfCBFW0xvYWQgdG8gUzNdXG4gIEUgLS0-fHN0YWdpbmcgYW5kIGluc2VydGluZ3wgR1tMb2FkIHRvIEFtYXpvbiByZWRzaGlmdF0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtLYWdnbGUgZGF0YXNldF0gLS0-fGF1dGhvciBuYW1lc3wgQihBcHBsZSBpVHVuZXMgQVBJKVxuICBCIC0tPiB8dXJsIGZlZWR8IEMoWE1MIGZlZWQpXG4gIEEgLS0-fHJhdGluZ3N8IERbTGFwdG9wXVxuICBCIC0tPnxhdXRvaG9ycyBpbmZvcm1hdGlvbnN8IERbaVBob25lXVxuICBDIC0tPnxlcGlzb2RlcyBpbmZvcm1hdGlvbnN8IER7TG9jYWwgc3RvcmFnZX1cblx0RCAtLT58cHJvY2Vzc2luZyBkYXRhfCBFW0xvYWQgdG8gUzNdXG4gIEUgLS0-fHN0YWdpbmcgYW5kIGluc2VydGluZ3wgR1tMb2FkIHRvIEFtYXpvbiByZWRzaGlmdF0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
+### Data Dictionary
+**Data dictionary is available at this link:** [Data Dictionary Final Project](https://udacity-course-bucket.s3.us-east-2.amazonaws.com/Data+Dictionary+-+Final+Project.pdf)  
+
+  
 ### Results
 ------------------------------------
 Modeling results and results can be seen in the notebooks folder of the test.ipynb file

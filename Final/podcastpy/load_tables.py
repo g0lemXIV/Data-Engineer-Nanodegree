@@ -5,6 +5,7 @@ import psycopg2
 import os
 from sql_queries import copy_table_queries, insert_table_queries
 from config import config
+from data_quality import check_db
 import time
 
 
@@ -47,6 +48,8 @@ def main():
     """
     conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     cur = conn.cursor()
+    # check connections
+    check_db(cur=cur)
     # measure time
     start = time.time()
     load_staging_tables(cur, conn)

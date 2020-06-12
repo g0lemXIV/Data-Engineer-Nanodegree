@@ -5,7 +5,7 @@ import os
 import psycopg2
 from sql_queries import create_table_queries, drop_table_queries
 from config import config
-
+from data_quality import check_db
 
 def drop_tables(cur, conn) -> None:
     """Drop all tables base on drop_table_queries
@@ -47,6 +47,8 @@ def main() -> None:
     conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     print('connenction establish')
     cur = conn.cursor()
+    # check connections
+    check_db(cur=cur)
     print('drop tables')
     drop_tables(cur, conn)
     print('create tables')

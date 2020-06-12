@@ -15,6 +15,8 @@ from rss_wrapper import main as xmlparser
 import aws_utils as aws
 from load_tables import main as staging
 from create_tables import main as creating
+# import data quality functions
+from data_quality import count_data, count_list
 # aws sdk
 import boto3
 
@@ -208,6 +210,7 @@ def s3_to_redshift() -> None:
     creating()
     staging()
 
+
 def main(test: bool = True):
     """Main function to ETL pipeline.
     Steps are common:
@@ -224,6 +227,8 @@ def main(test: bool = True):
     """
     print("Start processing kaggle data")
     authors = load_authors_names(test=test)
+    # test authors list
+
     print("Start collecting itunes data")
     feed_list = itunes_collect(authors)
     print("Start collecting rrs feed")
@@ -245,7 +250,7 @@ def main(test: bool = True):
             new_name = '{}/{}_{}.json'.format(name, name, i)
             print(new_name)
             load_to_s3(path, s3_pth=new_name,
-                        bucket_name=os.getenv('BUCKET_NAME'))
+                       bucket_name=os.getenv('BUCKET_NAME'))
         # Start Staging and Inserting
         print("Starting S3 to Redshift loader")
         s3_to_redshift()
